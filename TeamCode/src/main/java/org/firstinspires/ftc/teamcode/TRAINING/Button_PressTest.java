@@ -3,33 +3,29 @@ package org.firstinspires.ftc.teamcode.TRAINING;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
-@TeleOp
+@TeleOp(name = "Servo and Motor Test")
 public class Button_PressTest extends OpMode {
-    public DcMotor motor1;
-    private DcMotor motor2;
-
-    public Button_PressTest(DcMotor motor, DcMotor motorsecond) {
-        this.motor1 = motor;
-        this.motor2 = motorsecond;
-    }
+    public DcMotor motor;
+    public Servo servo;
 
     @Override
     public void init() {
-        DcMotor motor1 = hardwareMap.get(DcMotor.class, "motor1");
-        motor1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-    }
-
-    public void add (double a, double b) {
-       // return a + b;
+        this.motor = hardwareMap.get(DcMotor.class, "fridge");
+        this.servo = hardwareMap.get(Servo.class, "dishwasher");
+        this.motor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
     @Override
     public void loop() {
-        // comment text here
+        // TODO FOR CODING STUDENTS: make this move forward AND return back!!
         if (gamepad1.a) {
-            motor1.setPower(1);
+            motor.setPower(1); // todo for biyo: why isnt this working lol????
+        } else if (gamepad1.b) {
+            servo.setPosition(1);
         }
-        telemetry.addData("Motor Position", motor1.getCurrentPosition());
+        telemetry.addData("Motor Position", motor.getCurrentPosition());
+        telemetry.addData("Servo Position", servo.getPosition());
     }
 }
